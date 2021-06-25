@@ -34,7 +34,7 @@ class CurrencyFragment : Fragment() {
         binding.listMonedas.adapter= adapter
         viewModel.allMonedas.observe(viewLifecycleOwner, Observer {
             it?.let{
-                adapter.data= it
+                adapter.submitList(it)
             }
         })
 

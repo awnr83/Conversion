@@ -8,13 +8,17 @@
         <variable
             name="moneda"
             type="com.example.conversion.database.Moneda" />
+        <variable
+            name="clickListener"
+            type="com.example.conversion.convertir.MonedaListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#EDE7E7">
+        android:background="#EDE7E7"
+        android:onClick="@{()->clickListener.onClick(moneda)}">
 
         <ImageView
             android:id="@+id/imageView"

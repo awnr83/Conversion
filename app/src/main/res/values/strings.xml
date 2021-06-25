@@ -3,7 +3,7 @@
 
     <!--Fragment Currency-->
     <string name="fc_pesos">Pesos: </string>
-    <string name="fc_convertir">Convertir a nro: </string>
+    <string name="fc_convertir">Ingrese un valor</string>
     <string name="fc_Resultado">Resultado: $ %f </string>
 
     <!--Fragment Money-->

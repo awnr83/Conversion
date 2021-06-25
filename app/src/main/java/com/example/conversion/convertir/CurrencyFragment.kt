@@ -3,6 +3,7 @@ package com.example.conversion.convertir
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -33,7 +34,9 @@ class CurrencyFragment : Fragment() {
 
         val manager= GridLayoutManager(activity,3)
         binding.listMonedas.layoutManager=manager
-        val adapter= CurrencyAdapter()
+        val adapter= CurrencyAdapter(MonedaListener {id->
+            viewModel.onMonedaClicked(id)
+        })
         binding.listMonedas.adapter= adapter
         viewModel.allMonedas.observe(viewLifecycleOwner, Observer {
             it?.let{
@@ -41,7 +44,13 @@ class CurrencyFragment : Fragment() {
             }
         })
 
-
+        //aviso no cargo valor
+        viewModel.dato.observe(viewLifecycleOwner, Observer {
+            if(it){
+                Toast.makeText(context, getString(R.string.fc_convertir), Toast.LENGTH_SHORT).show()
+                viewModel.doneDato()
+            }
+        })
         //menu agregar Moneda
         setHasOptionsMenu(true)
 

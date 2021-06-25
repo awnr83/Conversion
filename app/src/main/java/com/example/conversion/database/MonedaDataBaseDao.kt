@@ -13,7 +13,7 @@ interface MonedaDataBaseDao {
     @Query("select * from table_moneda where nombre= :nom")
     fun getMoneda_nombre(nom: String): Moneda?
     @Query("select * from table_moneda where nro= :nro")
-    fun getMoneda_nro(nro: Int): Moneda?
+    fun getMoneda_nro(nro: Long): Moneda?
 
 //actualizaciones
     @Update

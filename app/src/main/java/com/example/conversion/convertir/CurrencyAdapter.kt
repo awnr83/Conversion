@@ -1,30 +1,28 @@
 package com.example.conversion.convertir
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.conversion.R
 import com.example.conversion.database.Moneda
 import com.example.conversion.databinding.ListItemsBinding
 
-class CurrencyAdapter: ListAdapter<Moneda, CurrencyAdapter.ViewHolder>(CurrencyDiffUtilCallback()){
+class CurrencyAdapter(val clickListener: MonedaListener): ListAdapter<Moneda, CurrencyAdapter.ViewHolder>(CurrencyDiffUtilCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.render(getItem(position))
+        holder.render(getItem(position), clickListener)
     }
 
     //clase para list_items
     class ViewHolder private constructor(val binding: ListItemsBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun render(item: Moneda){
+        fun render(item: Moneda, clickListener: MonedaListener){
             binding.moneda= item
+            binding.clickListener= clickListener
             binding.executePendingBindings()
         }
         companion object{
@@ -35,6 +33,10 @@ class CurrencyAdapter: ListAdapter<Moneda, CurrencyAdapter.ViewHolder>(CurrencyD
             }
         }
     }
+}
+
+class MonedaListener(val clickListener:(nro:Long)->Unit) {
+    fun onClick(moneda: Moneda)= clickListener(moneda.nro)
 }
 
 //DiffUtil

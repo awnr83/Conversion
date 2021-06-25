@@ -19,7 +19,6 @@ class CurrencyViewModel(val dataBase: MonedaDataBaseDao, application: Applicatio
 //variables editText---------------------------------------
     //campo EditText
     var pesos= MutableLiveData<String>()
-    var moneda=Moneda()
 
     //campos encapsulado
     private val _resultado= MutableLiveData<String>()
@@ -44,33 +43,21 @@ class CurrencyViewModel(val dataBase: MonedaDataBaseDao, application: Applicatio
     val allMonedas= dataBase.getallMonedas()
 
     //click en una moneda
-    /*
-    fun onStopTraking(){
-        uiScope.launch {
-            val oldToNight=toNight.value?: return@launch //no vuelve desde lambda
-            oldToNight.endTimeMilli= System.currentTimeMillis()
-            update(oldToNight)
-            //al detener se tiene q asignar el sleep asi dispara el observer
-            _eventNavigation.value=oldToNight
-        }
-    }
-
-     */
     fun onMonedaClicked(id: Long) {
-        var aux=pesos.value
+        var moneda=Moneda()
         if (!pesos.value.isNullOrEmpty()) {
             uiScope.launch {
                 moneda= getToMonedaFromdataBase(id)
                 _monedaString.value = moneda.nombre
-                _resultado.value= String.format("%.3f",((pesos.value!!.toDouble()).div(moneda.valor.toDouble())))
+                _resultado.value= String.format("%.3f",((pesos.value!!.toDouble()).div(moneda.valor)))
             }
         } else
             _dato.value = true
     }
     private suspend fun getToMonedaFromdataBase(id: Long): Moneda{ //se inicia otro hilo
         return withContext(Dispatchers.IO){
-            var night= dataBase.getMoneda_nro(id)
-            night!!
+            var moneda= dataBase.getMoneda_nro(id)
+            moneda!!
         }
     }
 

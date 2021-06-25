@@ -51,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:hint="moneda"
             android:text="@{viewModel.monedaString}"
             android:textColor="#000000"
             android:textSize="15sp"

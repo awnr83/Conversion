@@ -20,7 +20,7 @@ interface MonedaDataBaseDao {
     fun actualizar(moneda: Moneda)
 
 //listar todos
-    @Query("select * from table_moneda order by nro desc")
+    @Query("select * from table_moneda order by nombre asc")
     fun getallMonedas(): LiveData<List<Moneda>>
 
 //eliminar

@@ -32,7 +32,7 @@ class CurrencyViewModel(val dataBase: MonedaDataBaseDao, application: Applicatio
         nro.value="-"
     }
 //------ Todas las monedas Cargadas
-    private val allMonedas= dataBase.getallMonedas()
+    val allMonedas= dataBase.getallMonedas()
     var allMonedasString=  Transformations.map(allMonedas){ formatMonedasToString(it, application.resources) }
 //    var allMonedasString= if(allMonedas.value.isNullOrEmpty()) {
 //        "No hay datos"

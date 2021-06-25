@@ -1,6 +1,6 @@
 package com.example.conversion.convertir
 
-import android.app.Application
+
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.conversion.R
 import com.example.conversion.database.MonedaDataBase
 import com.example.conversion.databinding.FragmentCurrencyBinding
@@ -30,6 +31,8 @@ class CurrencyFragment : Fragment() {
         binding.viewModel=viewModel
         binding.lifecycleOwner=this
 
+        val manager= GridLayoutManager(activity,3)
+        binding.listMonedas.layoutManager=manager
         val adapter= CurrencyAdapter()
         binding.listMonedas.adapter= adapter
         viewModel.allMonedas.observe(viewLifecycleOwner, Observer {

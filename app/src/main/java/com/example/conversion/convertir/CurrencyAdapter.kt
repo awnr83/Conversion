@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.conversion.R
 import com.example.conversion.database.Moneda
+import com.example.conversion.databinding.ListItemsBinding
 
 class CurrencyAdapter: ListAdapter<Moneda, CurrencyAdapter.ViewHolder>(CurrencyDiffUtilCallback()){
 
@@ -20,19 +21,17 @@ class CurrencyAdapter: ListAdapter<Moneda, CurrencyAdapter.ViewHolder>(CurrencyD
     }
 
     //clase para list_items
-    class ViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView){
-        val textMoneda= itemView.findViewById<TextView>(R.id.textViewMoneda)
-        val textValor= itemView.findViewById<TextView>(R.id.textViewValor)
+    class ViewHolder private constructor(val binding: ListItemsBinding): RecyclerView.ViewHolder(binding.root){
 
         fun render(item: Moneda){
-            textMoneda.text= item.nombre
-            textValor.text= item.valor.toString()
+            binding.moneda= item
+            binding.executePendingBindings()
         }
         companion object{
             fun from(parent: ViewGroup):ViewHolder{
                 val layoutInflater= LayoutInflater.from(parent.context)
-                val view= layoutInflater.inflate(R.layout.list_items, parent, false)
-                return ViewHolder(view)
+                val binding= ListItemsBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
             }
         }
     }
